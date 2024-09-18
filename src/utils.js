@@ -1,42 +1,33 @@
-function passwordGenerator(
-    passwordLength,
-    includeUpperCase,
-    includeLowerCase,
-    includeNumber,
-    includeSymbol
-  ) {
-    const numbers = '123456789';
-    const symbols = '!@#$%^&*()_+';
-    const upperCaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz';
-  
-    let characters = '';
-  
-    if (includeUpperCase) {
-      characters += upperCaseLetters;
+function passwordGenerator(passwordLength, isUpperCase, isLowerCase, isNumber, isSymbols) {
+
+    let upperCaseLatter = 'ABCDEFGHIZKLMNOPQRSTUVWXYZ';
+    let lowerCaseLatter = 'abcdefghizklmnopqrstuvwxyz';
+    let number = 123456789;
+    let symbols = "!@#$%^&*()_+";
+
+    let character = ''
+    if (isUpperCase) {
+        character += upperCaseLatter;
     }
-    if (includeLowerCase) {
-      characters += lowerCaseLetters;
+    if (isLowerCase) {
+        character += lowerCaseLatter;
     }
-    if (includeNumber) {
-      characters += numbers;
+    if (isNumber) {
+        character += number;
     }
-    if (includeSymbol) {
-      characters += symbols;
+    if (isSymbols) {
+        character += symbols;
     }
-  
-    if (!passwordLength || passwordLength <= 0) {
-      console.log('Please enter a valid password length.');
-      return '';
+    if (!passwordLength) {
+        alert("Please provide length of password !")
+        return '';
     }
-  
     let password = '';
     for (let i = 0; i < passwordLength; i++) {
-      password += characters[Math.floor(Math.random() * characters.length)];
+        password += character[Math.floor(Math.random() * character.length)]
     }
-  
     return password;
-  }
-  
-  export { passwordGenerator };
-  
+
+}
+
+export { passwordGenerator };

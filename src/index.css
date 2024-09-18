@@ -14,61 +14,55 @@ body {
   box-sizing: border-box;
   line-height: 1.7;
   background-color: #0f0b0bfa;
+  color: white;
   height: 100vh;
+  width: 100%;
 }
 
 .container {
-  width: 80%;
-  color: azure;
-  background-color: black;
-  border: 5px solid rgba(204, 191, 191, 0.63);
-  border-radius: 20px;
+
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  
-
-}
-
-.header-container {
-  display: flex;
-  justify-content: space-around;
-  font-weight: bold;
-}
-
-.input-container input {
-  width: 100%;
-  padding: 20px 0px;
- 
-}
-
-.input-content {
-  display: flex;
-  column-gap: 20px;
-}
-
-.display-container {}
-
-.btn-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border: 5px solid rgb(105, 98, 98);
   padding: 20px;
-  
-}
-
-.btn-container>button {
-  background-color: brown;
-  color: antiquewhite;
-  padding: 10px 40px;
-  font-weight: bolder;
-  border: none;
   border-radius: 20px;
 }
 
-button:hover {
-  background-color: rgb(11, 158, 55);
-  color: antiquewhite;
-  cursor: pointer;
+.header-container {
+  text-align: center;
 }
+
+.input-container {
+  width: 100%;
+
+}
+
+.input-container>input {
+  width: 100%;
+  padding: 20px 0px;
+}
+
+.checkbox-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 10px;
+
+}
+.generator-button  {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+
+}
+.generator-button button {
+  color: white;
+  background-color: brown;
+  padding: 10px 20px ;
+ 
+
+}
+
+.display-container {}

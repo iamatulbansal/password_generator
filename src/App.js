@@ -1,98 +1,104 @@
-import React, { useState } from 'react';
-import { passwordGenerator } from './utils.js';
+import React, { useState } from "react";
+import { passwordGenerator } from "./utils.js";
+const App = () => {
+  const [password, setPassword] = useState("");
+  const [passwordLength, setPasswordLength] = useState(8);
 
-function App() {
-  const [password, setPassword] = useState('');
-  const [passLength, setPassLength] = useState(8);
   const [isUpperCase, setIsUpperCase] = useState(false);
   const [isLowerCase, setIsLowerCase] = useState(false);
-  const [isNum, setIsNum] = useState(false);
+  const [isNumber, setIsNumber] = useState(false);
   const [isSymbols, setIsSymbols] = useState(false);
 
-  const generatePassword = () => {
-    const options = [isUpperCase, isLowerCase, isNum, isSymbols];
-    const defaultOptions = options.every((el) => !el);
-    const newPassword = passwordGenerator(
-      Number(passLength),
-      defaultOptions || isUpperCase,
-      defaultOptions || isLowerCase,
-      defaultOptions || isNum,
-      defaultOptions || isSymbols
-    );
+  function passwordGen() {
+    const options = [isUpperCase, isLowerCase, isNumber, isSymbols];
+    const isOptions = options.every((el) => !el);
+    if (isOptions) {
+      const newPassword = passwordGenerator(
+        passwordLength,
+        true,
+        true,
+        true,
+        true
+      );
+      setPassword(newPassword);
+    } else {
+      const newPassword = passwordGenerator(
+        passwordLength,
+        isUpperCase,
+        isLowerCase,
+        isNumber,
+        isSymbols
+      );
+      setPassword(newPassword);
+    }
+  }
 
-    setPassword(newPassword);
-  };
-
-  const handleCopy = () => {
+  function handleCopy() {
     navigator.clipboard
       .writeText(password)
-      .then(() => {
-        alert('Password copied to clipboard!');
-      })
-      .catch((err) => {
-        console.error('Failed to copy: ', err);
-      });
-  };
-
+      .then((text) => alert("password copied from the screen!"))
+      .catch((err) => console.log("Error", err));
+  }
   return (
-    <div className="container">
-      <div className="header-container">
-        <h2>Password Length: {passLength}</h2>
+    <div className='container'>
+      <div className='header-container'>
+        <h2>Password input Length : {passwordLength}</h2>
       </div>
-      <div className="input-container">
+      <div className='input-container'>
         <input
-          type="range"
+          type='range'
           min={6}
           max={16}
-          value={passLength}
-          onChange={(e) => setPassLength(e.target.value)}
+          value={passwordLength}
+          onChange={(e) => {
+            setPasswordLength(e.target.value);
+          }}
         />
       </div>
-      <div className="input-content">
+      <div className='checkbox-container'>
         <input
-          type="checkbox"
-          id="upper"
-          onChange={({ target }) => setIsUpperCase(target.checked)}
-          aria-label="Include uppercase letters"
+          type='checkbox'
+          id='upperCase'
+          onChange={(e) => setIsUpperCase(e.target.checked)}
         />
-        <label htmlFor="upper">Uppercase Letters</label>
+        <label htmlFor='upperCase'>UpperCase latter</label>
 
         <input
-          type="checkbox"
-          id="lower"
-          onChange={({ target }) => setIsLowerCase(target.checked)}
-          aria-label="Include lowercase letters"
+          type='checkbox'
+          id='lowerCase'
+          onChange={(e) => setIsLowerCase(e.target.checked)}
         />
-        <label htmlFor="lower">Lowercase Letters</label>
+        <label htmlFor='lowerCase'>LowerCase latter</label>
 
         <input
-          type="checkbox"
-          id="numbers"
-          onChange={({ target }) => setIsNum(target.checked)}
-          aria-label="Include numbers"
+          type='checkbox'
+          id='number'
+          onChange={(e) => setIsNumber(e.target.checked)}
         />
-        <label htmlFor="numbers">Numbers</label>
+        <label htmlFor='number'>Number</label>
 
         <input
-          type="checkbox"
-          id="symbols"
-          onChange={({ target }) => setIsSymbols(target.checked)}
-          aria-label="Include symbols"
+          type='checkbox'
+          id='symbol'
+          onChange={(e) => setIsSymbols(e.target.checked)}
         />
-        <label htmlFor="symbols">Symbols</label>
+        <label htmlFor='symbol'>Symbols</label>
       </div>
-      <div className="btn-container">
-        <button onClick={generatePassword}>Generate Password</button>
+      <div className='generator-button'>
+        <button onClick={passwordGen}>Password Generator</button>
       </div>
-      <div className="display-container">
-        <h2>Password: {password}  <button onClick={handleCopy} disabled={!password}>
-          Copy Password
-        </button></h2>
-       
-        <h2>Password Length: {password.length}</h2>
+
+      <div className='display-container'>
+        <h2>
+          Password : {password} :{" "}
+          <button onClick={handleCopy} disabled={!password}>
+            copy password
+          </button>
+        </h2>
+        <h2>Password Length : {password.length}</h2>
       </div>
     </div>
   );
-}
+};
 
 export default App;
